@@ -6,10 +6,10 @@ type recipeProps = {
   waterPart: number;
 };
 
-// TODO: Add a unique ID; validate the phase proportion to be not greater than 1 in total
 // TODO: Use prisma ORM to spin up a postgres DB; implement repo
 export class Recipe {
   private constructor(
+    public readonly id: string,
     public readonly name: string,
 
     public readonly phases: phase[],
@@ -33,7 +33,14 @@ export class Recipe {
       throw new RecipeCreateError(violations);
     }
 
-    return new Recipe(name, phases, waterPart, new Date(), null);
+    return new Recipe(
+      crypto.randomUUID(),
+      name,
+      phases,
+      waterPart,
+      new Date(),
+      null
+    );
   }
 }
 

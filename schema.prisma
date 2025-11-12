@@ -1,0 +1,26 @@
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client"
+    output   = "src/generated/prisma"  
+}
+
+model Recipe {
+    id String @id
+    name String
+
+    phases Phase[]
+    waterPart Float 
+
+    createdAt DateTime
+    modifiedAt DateTime?
+}
+
+model Phase{
+    id String @id @default(uuid())
+    recipe Recipe @relation(fields: [recipeId], references: [id])
+    recipeId String
+}

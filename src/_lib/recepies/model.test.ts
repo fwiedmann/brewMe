@@ -30,6 +30,7 @@ describe("Recipe.create", () => {
       waterPart: 16,
     });
 
+    expect(recipe.id).not.toBeNull();
     expect(recipe.name).toBe("Morning V60");
     expect(recipe.phases).toEqual([bloomingPhase, pourOverPhase]);
     expect(recipe.waterPart).toBe(16);
