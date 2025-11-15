@@ -20,40 +20,70 @@ export type PhaseModel = runtime.Types.Result.DefaultSelection<Prisma.$PhasePayl
 
 export type AggregatePhase = {
   _count: PhaseCountAggregateOutputType | null
+  _avg: PhaseAvgAggregateOutputType | null
+  _sum: PhaseSumAggregateOutputType | null
   _min: PhaseMinAggregateOutputType | null
   _max: PhaseMaxAggregateOutputType | null
+}
+
+export type PhaseAvgAggregateOutputType = {
+  proportion: number | null
+}
+
+export type PhaseSumAggregateOutputType = {
+  proportion: number | null
 }
 
 export type PhaseMinAggregateOutputType = {
   id: string | null
   recipeId: string | null
+  proportion: number | null
+  step: string | null
 }
 
 export type PhaseMaxAggregateOutputType = {
   id: string | null
   recipeId: string | null
+  proportion: number | null
+  step: string | null
 }
 
 export type PhaseCountAggregateOutputType = {
   id: number
   recipeId: number
+  proportion: number
+  step: number
   _all: number
 }
 
 
+export type PhaseAvgAggregateInputType = {
+  proportion?: true
+}
+
+export type PhaseSumAggregateInputType = {
+  proportion?: true
+}
+
 export type PhaseMinAggregateInputType = {
   id?: true
   recipeId?: true
+  proportion?: true
+  step?: true
 }
 
 export type PhaseMaxAggregateInputType = {
   id?: true
   recipeId?: true
+  proportion?: true
+  step?: true
 }
 
 export type PhaseCountAggregateInputType = {
   id?: true
   recipeId?: true
+  proportion?: true
+  step?: true
   _all?: true
 }
 
@@ -95,6 +125,18 @@ export type PhaseAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: PhaseAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: PhaseSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: PhaseMinAggregateInputType
@@ -125,6 +167,8 @@ export type PhaseGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: PhaseCountAggregateInputType | true
+  _avg?: PhaseAvgAggregateInputType
+  _sum?: PhaseSumAggregateInputType
   _min?: PhaseMinAggregateInputType
   _max?: PhaseMaxAggregateInputType
 }
@@ -132,7 +176,11 @@ export type PhaseGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type PhaseGroupByOutputType = {
   id: string
   recipeId: string
+  proportion: number
+  step: string
   _count: PhaseCountAggregateOutputType | null
+  _avg: PhaseAvgAggregateOutputType | null
+  _sum: PhaseSumAggregateOutputType | null
   _min: PhaseMinAggregateOutputType | null
   _max: PhaseMaxAggregateOutputType | null
 }
@@ -158,12 +206,16 @@ export type PhaseWhereInput = {
   NOT?: Prisma.PhaseWhereInput | Prisma.PhaseWhereInput[]
   id?: Prisma.StringFilter<"Phase"> | string
   recipeId?: Prisma.StringFilter<"Phase"> | string
+  proportion?: Prisma.FloatFilter<"Phase"> | number
+  step?: Prisma.StringFilter<"Phase"> | string
   recipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.RecipeWhereInput>
 }
 
 export type PhaseOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
+  proportion?: Prisma.SortOrder
+  step?: Prisma.SortOrder
   recipe?: Prisma.RecipeOrderByWithRelationInput
 }
 
@@ -173,15 +225,21 @@ export type PhaseWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PhaseWhereInput[]
   NOT?: Prisma.PhaseWhereInput | Prisma.PhaseWhereInput[]
   recipeId?: Prisma.StringFilter<"Phase"> | string
+  proportion?: Prisma.FloatFilter<"Phase"> | number
+  step?: Prisma.StringFilter<"Phase"> | string
   recipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.RecipeWhereInput>
 }, "id">
 
 export type PhaseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
+  proportion?: Prisma.SortOrder
+  step?: Prisma.SortOrder
   _count?: Prisma.PhaseCountOrderByAggregateInput
+  _avg?: Prisma.PhaseAvgOrderByAggregateInput
   _max?: Prisma.PhaseMaxOrderByAggregateInput
   _min?: Prisma.PhaseMinOrderByAggregateInput
+  _sum?: Prisma.PhaseSumOrderByAggregateInput
 }
 
 export type PhaseScalarWhereWithAggregatesInput = {
@@ -190,40 +248,56 @@ export type PhaseScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PhaseScalarWhereWithAggregatesInput | Prisma.PhaseScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Phase"> | string
   recipeId?: Prisma.StringWithAggregatesFilter<"Phase"> | string
+  proportion?: Prisma.FloatWithAggregatesFilter<"Phase"> | number
+  step?: Prisma.StringWithAggregatesFilter<"Phase"> | string
 }
 
 export type PhaseCreateInput = {
   id?: string
+  proportion: number
+  step: string
   recipe: Prisma.RecipeCreateNestedOneWithoutPhasesInput
 }
 
 export type PhaseUncheckedCreateInput = {
   id?: string
   recipeId: string
+  proportion: number
+  step: string
 }
 
 export type PhaseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  proportion?: Prisma.FloatFieldUpdateOperationsInput | number
+  step?: Prisma.StringFieldUpdateOperationsInput | string
   recipe?: Prisma.RecipeUpdateOneRequiredWithoutPhasesNestedInput
 }
 
 export type PhaseUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recipeId?: Prisma.StringFieldUpdateOperationsInput | string
+  proportion?: Prisma.FloatFieldUpdateOperationsInput | number
+  step?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PhaseCreateManyInput = {
   id?: string
   recipeId: string
+  proportion: number
+  step: string
 }
 
 export type PhaseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  proportion?: Prisma.FloatFieldUpdateOperationsInput | number
+  step?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PhaseUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recipeId?: Prisma.StringFieldUpdateOperationsInput | string
+  proportion?: Prisma.FloatFieldUpdateOperationsInput | number
+  step?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PhaseListRelationFilter = {
@@ -239,16 +313,30 @@ export type PhaseOrderByRelationAggregateInput = {
 export type PhaseCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
+  proportion?: Prisma.SortOrder
+  step?: Prisma.SortOrder
+}
+
+export type PhaseAvgOrderByAggregateInput = {
+  proportion?: Prisma.SortOrder
 }
 
 export type PhaseMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
+  proportion?: Prisma.SortOrder
+  step?: Prisma.SortOrder
 }
 
 export type PhaseMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
+  proportion?: Prisma.SortOrder
+  step?: Prisma.SortOrder
+}
+
+export type PhaseSumOrderByAggregateInput = {
+  proportion?: Prisma.SortOrder
 }
 
 export type PhaseCreateNestedManyWithoutRecipeInput = {
@@ -295,10 +383,14 @@ export type PhaseUncheckedUpdateManyWithoutRecipeNestedInput = {
 
 export type PhaseCreateWithoutRecipeInput = {
   id?: string
+  proportion: number
+  step: string
 }
 
 export type PhaseUncheckedCreateWithoutRecipeInput = {
   id?: string
+  proportion: number
+  step: string
 }
 
 export type PhaseCreateOrConnectWithoutRecipeInput = {
@@ -333,22 +425,32 @@ export type PhaseScalarWhereInput = {
   NOT?: Prisma.PhaseScalarWhereInput | Prisma.PhaseScalarWhereInput[]
   id?: Prisma.StringFilter<"Phase"> | string
   recipeId?: Prisma.StringFilter<"Phase"> | string
+  proportion?: Prisma.FloatFilter<"Phase"> | number
+  step?: Prisma.StringFilter<"Phase"> | string
 }
 
 export type PhaseCreateManyRecipeInput = {
   id?: string
+  proportion: number
+  step: string
 }
 
 export type PhaseUpdateWithoutRecipeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  proportion?: Prisma.FloatFieldUpdateOperationsInput | number
+  step?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PhaseUncheckedUpdateWithoutRecipeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  proportion?: Prisma.FloatFieldUpdateOperationsInput | number
+  step?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PhaseUncheckedUpdateManyWithoutRecipeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  proportion?: Prisma.FloatFieldUpdateOperationsInput | number
+  step?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -356,27 +458,35 @@ export type PhaseUncheckedUpdateManyWithoutRecipeInput = {
 export type PhaseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   recipeId?: boolean
+  proportion?: boolean
+  step?: boolean
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["phase"]>
 
 export type PhaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   recipeId?: boolean
+  proportion?: boolean
+  step?: boolean
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["phase"]>
 
 export type PhaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   recipeId?: boolean
+  proportion?: boolean
+  step?: boolean
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["phase"]>
 
 export type PhaseSelectScalar = {
   id?: boolean
   recipeId?: boolean
+  proportion?: boolean
+  step?: boolean
 }
 
-export type PhaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recipeId", ExtArgs["result"]["phase"]>
+export type PhaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recipeId" | "proportion" | "step", ExtArgs["result"]["phase"]>
 export type PhaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>
 }
@@ -395,6 +505,8 @@ export type $PhasePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     recipeId: string
+    proportion: number
+    step: string
   }, ExtArgs["result"]["phase"]>
   composites: {}
 }
@@ -821,6 +933,8 @@ export interface Prisma__PhaseClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface PhaseFieldRefs {
   readonly id: Prisma.FieldRef<"Phase", 'String'>
   readonly recipeId: Prisma.FieldRef<"Phase", 'String'>
+  readonly proportion: Prisma.FieldRef<"Phase", 'Float'>
+  readonly step: Prisma.FieldRef<"Phase", 'String'>
 }
     
 

@@ -611,7 +611,9 @@ export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof 
 
 export const PhaseScalarFieldEnum = {
   id: 'id',
-  recipeId: 'recipeId'
+  recipeId: 'recipeId',
+  proportion: 'proportion',
+  step: 'step'
 } as const
 
 export type PhaseScalarFieldEnum = (typeof PhaseScalarFieldEnum)[keyof typeof PhaseScalarFieldEnum]

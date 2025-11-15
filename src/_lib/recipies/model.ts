@@ -1,14 +1,13 @@
 import { RecipeCreateError, Violation } from "./error";
 
-type recipeProps = {
+export type recipeProps = {
   name: string;
   phases: phase[];
   waterPart: number;
 };
 
-// TODO: Use prisma ORM to spin up a postgres DB; implement repo
 export class Recipe {
-  private constructor(
+  constructor(
     public readonly id: string,
     public readonly name: string,
 

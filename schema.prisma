@@ -19,8 +19,10 @@ model Recipe {
     modifiedAt DateTime?
 }
 
-model Phase{
+model Phase {
     id String @id @default(uuid())
     recipe Recipe @relation(fields: [recipeId], references: [id])
     recipeId String
+    proportion Float
+    step String
 }
