@@ -1,4 +1,4 @@
-import { Recipe, recipeProps } from "./model";
+import { findProps, findResult, Recipe, recipeProps } from "./model";
 import { RecipeRepository } from "./repository";
 import { RecipePrismaRepository } from "./db/RecepiePrismaRepository";
 
@@ -9,6 +9,10 @@ export class RecipeService {
     const r = Recipe.create(createProps);
     await this.repo.create(r);
     return r;
+  }
+
+  async find(query: findProps): Promise<findResult> {
+    return this.repo.find(query);
   }
 }
 

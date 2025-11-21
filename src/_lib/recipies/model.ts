@@ -78,3 +78,13 @@ export enum phaseStep {
   BLOOMING,
   POUR_OVER,
 }
+
+export type findResult = {
+  count: number;
+  recipes: Recipe[];
+};
+
+export type findProps = {
+  skip: number;
+  take: number;
+};

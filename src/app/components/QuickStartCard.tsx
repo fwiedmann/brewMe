@@ -6,10 +6,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
+import { useState } from "react";
+import RecipeDialog from "./RecipeDialog";
 
-export default function QuickStart() {
+export default function QuickStartCard() {
+  const [dialogOpen, setDialogOpen] = useState(false);
   return (
     <div className="">
+      <RecipeDialog open={true} />
       <Card>
         <CardHeader>
           <CardTitle>Quick Start</CardTitle>
@@ -19,7 +24,9 @@ export default function QuickStart() {
         </CardHeader>
         <CardContent>
           <div className="flex flex-row justify-evenly lg:justify-start lg:gap-5">
-            <Button variant="outline">+ New Recipe</Button>
+            <Button variant="outline" onClick={() => setDialogOpen(true)}>
+              + New Recipe
+            </Button>
             <Button variant="outline">+ New Brew</Button>
           </div>
         </CardContent>

@@ -1,6 +1,6 @@
-import { Recipe } from "./model";
+import { findProps, findResult, Recipe } from "./model";
 
 export interface RecipeRepository {
   create(recipe: Recipe): Promise<void>;
-  findAll(): Promise<Recipe[]>;
+  find(props: findProps): Promise<findResult>;
 }
