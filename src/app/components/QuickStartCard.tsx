@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
 import { useState } from "react";
 import RecipeDialog from "./RecipeDialog";
 
@@ -14,7 +14,10 @@ export default function QuickStartCard() {
   const [dialogOpen, setDialogOpen] = useState(false);
   return (
     <div className="">
-      <RecipeDialog open={true} />
+      <RecipeDialog
+        openDialog={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+      />
       <Card>
         <CardHeader>
           <CardTitle>Quick Start</CardTitle>
