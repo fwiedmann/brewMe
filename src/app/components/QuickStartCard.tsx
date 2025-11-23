@@ -9,16 +9,13 @@ import {
 } from "@/components/ui/card";
 import { useCallback, useState } from "react";
 import RecipeDialog from "../recipes/RecipeDialog";
-import { useRouter } from "next/navigation";
 
 export default function QuickStartCard() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const router = useRouter();
 
   const handleDialogClose = useCallback(() => {
     setDialogOpen(false);
-    router.refresh();
-  }, [router]);
+  }, []);
   return (
     <div className="">
       <RecipeDialog openDialog={dialogOpen} onClose={handleDialogClose} />

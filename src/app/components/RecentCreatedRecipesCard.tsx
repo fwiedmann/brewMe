@@ -14,8 +14,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import recipeServiceInstance from "@/src/_lib/recipies/service";
+import { cacheTag } from "next/cache";
 
 export default async function RecentCreatedRecipesCard() {
+  "use cache";
+  cacheTag("recipes");
+
   const rcps = await recipeServiceInstance.find({
     skip: 0,
     take: 5,

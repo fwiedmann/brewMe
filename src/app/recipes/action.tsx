@@ -2,6 +2,7 @@
 
 import { phaseStep } from "@/src/_lib/recipies/model";
 import recipeServiceInstance from "@/src/_lib/recipies/service";
+import { revalidateTag } from "next/cache";
 
 export type RecipeFormState = {
   success?: boolean;
@@ -24,5 +25,6 @@ export async function saveRecipe(
     waterPart: Number(form.get("waterPart") as string),
   });
 
+  revalidateTag("recipes", "max");
   return { success: true };
 }

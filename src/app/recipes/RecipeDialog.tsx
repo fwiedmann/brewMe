@@ -20,6 +20,7 @@ import { SelectGroup } from "@radix-ui/react-select";
 import { Button } from "@/components/ui/button";
 import { RecipeFormState, saveRecipe } from "./action";
 import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RecipeDialog(props: {
   openDialog: boolean;
@@ -37,6 +38,7 @@ export default function RecipeDialog(props: {
     return content;
   };
 
+  const router = useRouter();
   const { openDialog, onClose } = props;
   const [state, formAction, pending] = useActionState(
     saveRecipe,
@@ -46,8 +48,9 @@ export default function RecipeDialog(props: {
   useEffect(() => {
     if (!pending && state.success === true) {
       onClose(true);
+      router.refresh();
     }
-  }, [onClose, pending, state.success]);
+  }, [onClose, pending, state.success, router]);
 
   return (
     <Dialog
