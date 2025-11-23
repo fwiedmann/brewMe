@@ -18,11 +18,12 @@ import { Select } from "@/components/ui/select";
 import { Label } from "@radix-ui/react-label";
 import { SelectGroup } from "@radix-ui/react-select";
 import { Button } from "@/components/ui/button";
-import { saveRecipe } from "./action";
+import { RecipeFormState, saveRecipe } from "./action";
+import { useActionState, useEffect } from "react";
 
 export default function RecipeDialog(props: {
   openDialog: boolean;
-  onClose: () => void;
+  onClose: (created: boolean) => void;
 }) {
   const ratios = () => {
     const content = [];
@@ -35,12 +36,25 @@ export default function RecipeDialog(props: {
     }
     return content;
   };
+
+  const { openDialog, onClose } = props;
+  const [state, formAction, pending] = useActionState(
+    saveRecipe,
+    {} as RecipeFormState
+  );
+
+  useEffect(() => {
+    if (!pending && state.success === true) {
+      onClose(true);
+    }
+  }, [onClose, pending, state]);
+
   return (
     <Dialog
-      open={props.openDialog}
+      open={openDialog}
       onOpenChange={(open) => {
         if (!open) {
-          props.onClose();
+          onClose(false);
         }
       }}
     >
@@ -51,8 +65,8 @@ export default function RecipeDialog(props: {
             Configure your own custom recipe
           </DialogDescription>
         </DialogHeader>
-        <form action={saveRecipe}>
-          <div className="grid gap-4">
+        <form action={formAction}>
+          <div className="grid gap-4 pb-5">
             <div className="grid gap-3">
               <Label htmlFor="name">Name</Label>
               <Input name="name" defaultValue="" />
@@ -69,9 +83,16 @@ export default function RecipeDialog(props: {
               </Select>
             </div>
           </div>
-          <DialogFooter>
-            <Button type="submit">Create</Button>
-            <Button variant="secondary" onClick={() => props.onClose()}>
+          <DialogFooter className="gap-4">
+            <Button disabled={pending} type="submit">
+              Create
+            </Button>
+            <Button
+              disabled={pending}
+              variant="secondary"
+              onClick={() => onClose(false)}
+              type="button"
+            >
               Abort
             </Button>
           </DialogFooter>
