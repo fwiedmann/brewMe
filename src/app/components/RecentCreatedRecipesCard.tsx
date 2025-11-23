@@ -23,6 +23,8 @@ export default async function RecentCreatedRecipesCard() {
   const rcps = await recipeServiceInstance.find({
     skip: 0,
     take: 5,
+    sort: "desc",
+    sortBy: "createdAt",
   });
 
   return (

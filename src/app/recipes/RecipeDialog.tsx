@@ -77,7 +77,7 @@ export default function RecipeDialog(props: {
             <div className="grid gap-3">
               <Label htmlFor="">Ratio</Label>
               <Select name="waterPart" defaultValue="16">
-                <SelectTrigger defaultValue="16">
+                <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

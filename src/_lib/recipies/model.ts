@@ -87,4 +87,6 @@ export type findResult = {
 export type findProps = {
   skip: number;
   take: number;
+  sort?: "asc" | "desc";
+  sortBy?: "createdAt";
 };

@@ -1,6 +1,7 @@
 import { Prisma, PrismaClient } from "@/src/generated/prisma/client";
 import { findProps, findResult, phaseStep, Recipe } from "../model";
 import { RecipeRepository } from "../repository";
+import { SortOrder } from "@/src/generated/prisma/internal/prismaNamespace";
 
 type RecipeWithPhases = Prisma.RecipeGetPayload<{
   include: { phases: true };
@@ -51,8 +52,13 @@ export class RecipePrismaRepository implements RecipeRepository {
   }
 
   async find(props: findProps): Promise<findResult> {
+    const sort = (props.sort ? props.sort : "acs") as SortOrder;
+
     const c = await this.pc.recipe.count();
     const rcps = await this.pc.recipe.findMany({
+      orderBy: {
+        createdAt: props.sortBy === "createdAt" ? sort : undefined,
+      },
       skip: props.skip,
       take: props.take,
       include: {
