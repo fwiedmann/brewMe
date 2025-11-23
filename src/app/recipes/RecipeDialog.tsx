@@ -47,7 +47,7 @@ export default function RecipeDialog(props: {
     if (!pending && state.success === true) {
       onClose(true);
     }
-  }, [onClose, pending, state]);
+  }, [onClose, pending, state.success]);
 
   return (
     <Dialog
