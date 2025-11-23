@@ -9,7 +9,7 @@ export type RecipeFormState = {
   message?: string;
   errors?: Record<string, string[]>;
 };
-
+// TODO: add validation
 export async function saveRecipe(
   prevState: RecipeFormState,
   form: FormData
@@ -25,6 +25,6 @@ export async function saveRecipe(
     waterPart: Number(form.get("waterPart") as string),
   });
 
-  revalidateTag("recipes", "max");
+  revalidateTag("recipes", { expire: 0 });
   return { success: true };
 }

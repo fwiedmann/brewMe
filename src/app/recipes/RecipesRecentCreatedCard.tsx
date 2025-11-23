@@ -16,7 +16,9 @@ import {
 import recipeServiceInstance from "@/src/_lib/recipies/service";
 import { cacheTag } from "next/cache";
 
-export default async function RecentCreatedRecipesCard() {
+// TODO: add validation
+// TODO: add phases configuration
+export default async function RecipesRecentCreatedCard() {
   "use cache";
   cacheTag("recipes");
 
