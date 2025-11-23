@@ -1,4 +1,3 @@
-import Header from "./components/Header";
 import QuickStart from "./components/QuickStartCard";
 import RecentCreatedRecipesCard from "./components/RecentCreatedRecipesCard";
 

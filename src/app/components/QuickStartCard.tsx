@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useState } from "react";
-import RecipeDialog from "./RecipeDialog";
+import RecipeDialog from "../recipes/RecipeDialog";
 
 export default function QuickStartCard() {
   const [dialogOpen, setDialogOpen] = useState(false);

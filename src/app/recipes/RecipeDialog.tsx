@@ -4,6 +4,7 @@ import {
   DialogTitle,
   DialogHeader,
   DialogDescription,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import {
   SelectContent,
@@ -16,6 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Label } from "@radix-ui/react-label";
 import { SelectGroup } from "@radix-ui/react-select";
+import { Button } from "@/components/ui/button";
+import { saveRecipe } from "./action";
 
 export default function RecipeDialog(props: {
   openDialog: boolean;
@@ -48,15 +51,15 @@ export default function RecipeDialog(props: {
             Configure your own custom recipe
           </DialogDescription>
         </DialogHeader>
-        <form>
+        <form action={saveRecipe}>
           <div className="grid gap-4">
             <div className="grid gap-3">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" name="name" defaultValue="" />
+              <Input name="name" defaultValue="" />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="">Ratio</Label>
-              <Select defaultValue="16">
+              <Select name="waterPart" defaultValue="16">
                 <SelectTrigger defaultValue="16">
                   <SelectValue />
                 </SelectTrigger>
@@ -66,6 +69,12 @@ export default function RecipeDialog(props: {
               </Select>
             </div>
           </div>
+          <DialogFooter>
+            <Button type="submit">Create</Button>
+            <Button variant="secondary" onClick={() => props.onClose()}>
+              Abort
+            </Button>
+          </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
