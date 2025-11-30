@@ -75,8 +75,8 @@ export type phase = {
 };
 
 export enum phaseStep {
-  BLOOMING,
-  POUR_OVER,
+  BLOOMING = "BLOOMING",
+  POUR_OVER = "POUR_OVER",
 }
 
 export type findResult = {

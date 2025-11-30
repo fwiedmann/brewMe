@@ -18,7 +18,11 @@ export default function QuickStartCard() {
   }, []);
   return (
     <div className="">
-      <RecipeDialog openDialog={dialogOpen} onClose={handleDialogClose} />
+      <RecipeDialog
+        openDialog={dialogOpen}
+        key={dialogOpen ? "open" : "close"}
+        onClose={handleDialogClose}
+      />
       <Card>
         <CardHeader>
           <CardTitle>Quick Start</CardTitle>

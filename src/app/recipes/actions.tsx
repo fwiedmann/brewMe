@@ -1,6 +1,6 @@
 "use server";
 
-import { phaseStep } from "@/src/_lib/recipies/model";
+import { phase } from "@/src/_lib/recipies/model";
 import recipeServiceInstance from "@/src/_lib/recipies/service";
 import { revalidateTag } from "next/cache";
 
@@ -11,17 +11,16 @@ export type RecipeFormState = {
 };
 // TODO: add validation
 export async function saveRecipe(
+  phases: phase[],
   prevState: RecipeFormState,
   form: FormData
 ): Promise<RecipeFormState> {
+  console.log(phases);
+  console.log(form);
+
   await recipeServiceInstance.createRecipe({
     name: form.get("name") as string,
-    phases: [
-      {
-        proportion: 1,
-        step: phaseStep.POUR_OVER,
-      },
-    ],
+    phases: phases,
     waterPart: Number(form.get("waterPart") as string),
   });
 
